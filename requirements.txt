@@ -1,5 +1,5 @@
 Flask==2.3.3
 Flask-CORS==4.0.0
-Pillow==10.1.0  # Updated version that supports newer Python
-torch==2.2.2    # If you're using PyTorch
-gunicorn==21.2.0
+Pillow==9.5.0  # Downgraded for better compatibility
+gunicorn==20.1.0
+torch==2.0.1 --index-url https://download.pytorch.org/whl/cpu

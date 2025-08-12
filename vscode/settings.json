@@ -1,0 +1,10 @@
+{
+    "python.defaultInterpreterPath": "./venv/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "files.exclude": {
+        "__pycache__": true,
+        "*.pyc": true,
+        ".pytest_cache": true,
+        "venv": false
+    }
+}

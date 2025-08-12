@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OliveAI - Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <div class="logo-icon">🫒</div>
+                    <span class="logo-text">OliveAI Disease Detection</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#api">API</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1>AI Olive Disease Classification</h1>
+                <p>Upload an image of olive leaves or branches to instantly detect diseases using our advanced machine learning model</p>
+            </section>
+
+            <!-- Classification Interface -->
+            <div class="classification-container">
+                <!-- Input Section -->
+                <div class="input-section">
+                    <h2>Choose Input Method</h2>
+                    
+                    <!-- File Upload -->
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <h3>Upload Image</h3>
+                        <p>Drag and drop or click to select</p>
+                        <button class="upload-btn" id="uploadBtn">Choose File</button>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+
+                    <!-- URL Input -->
+                    <div class="url-section">
+                        <h3>Or Enter Image URL</h3>
+                        <div class="url-input-group">
+                            <input type="url" id="urlInput" placeholder="https://example.com/olive-image.jpg" class="url-input">
+                            <button id="loadUrlBtn" class="load-btn">Load</button>
+                        </div>
+                    </div>
+
+                    <!-- Classify Button -->
+                    <button class="classify-btn" id="classifyBtn" disabled>
+                        <span class="btn-icon">🔍</span>
+                        Classify Image
+                    </button>
+                </div>
+
+                <!-- Preview & Results Section -->
+                <div class="preview-section">
+                    <h2>Preview & Results</h2>
+                    <div class="preview-container" id="previewContainer">
+                        <div class="preview-placeholder">
+                            <div class="placeholder-icon">🖼️</div>
+                            <p>No image selected</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Display -->
+                    <div class="results-container" id="resultsContainer" style="display: none;">
+                        <h3>Classification Results</h3>
+                        <div class="result-item">
+                            <span class="result-label">Predicted Disease:</span>
+                            <span class="result-value" id="predictedClass">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Confidence:</span>
+                            <span class="result-value" id="confidence">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Health Status:</span>
+                            <span class="result-value health-status" id="healthStatus">-</span>
+                        </div>
+                        
+                        <!-- Report Generation Section -->
+                        <div class="report-section" id="reportSection">
+                            <h4>📊 Generate Professional Report</h4>
+                            <p>Get AI-powered recommendations and treatment suggestions based on your analysis</p>
+                            <button class="generate-report-btn" id="generateReportBtn">
+                                <span class="btn-icon">🤖</span>
+                                Generate AI Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Display Section -->
+            <div class="report-display" id="reportDisplay" style="display: none;">
+                <div class="report-header">
+                    <h2>🏥 Professional Analysis Report</h2>
+                    <div class="report-actions">
+                        <button class="download-btn" id="downloadReportBtn">
+                            <span class="btn-icon">💾</span>
+                            Download Report
+                        </button>
+                        <button class="print-btn" id="printReportBtn">
+                            <span class="btn-icon">🖨️</span>
+                            Print Report
+                        </button>
+                    </div>
+                </div>
+                <div class="report-content" id="reportContent">
+                    <!-- AI-generated report will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Sample Images Section -->
+            <section class="samples-section">
+                <h2>Try Sample Images</h2>
+                <p>Click on any image below to classify it instantly</p>
+                <div class="samples-grid">
+                    <div class="sample-item" data-sample="sample1">
+                        <img src="{{ url_for('static', filename='images/sample1.jpg') }}" alt="Sample Olive Image 1" onerror="this.src='https://images.unsplash.com/photo-1600298881974-6be191ceeda1?w=200&h=200&fit=crop'">
+                        <span class="sample-label">Sample</span>
+                    </div>
+                    <div class="sample-item" data-sample="sample2">
+                        <img src="{{ url_for('static', filename='images/sample2.jpg') }}" alt="Sample Olive Image 2" onerror="this.src='https://images.unsplash.com/photo-1583160247711-2191776b4b91?w=200&h=200&fit=crop'">
+                        <span class="sample-label">sample</span>
+                    </div>
+                    <div class="sample-item" data-sample="sample3">
+                        <img src="{{ url_for('static', filename='images/sample3.jpg') }}" alt="Sample Olive Image 3" onerror="this.src='https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=200&h=200&fit=crop'">
+                        <span class="sample-label">Sample</span>
+                    </div>
+                    <div class="sample-item" data-sample="sample4">
+                        <img src="{{ url_for('static', filename='images/sample4.jpg') }}" alt="Sample Olive Image 4" onerror="this.src='https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=200&fit=crop'">
+                        <span class="sample-label">Sample</span>
+                    </div>
+                    <div class="sample-item" data-sample="sample5">
+                        <img src="{{ url_for('static', filename='images/sample5.jpg') }}" alt="Sample Olive Image 5" onerror="this.src='https://images.unsplash.com/photo-1574263867128-a3d5c1b1deae?w=200&h=200&fit=crop'">
+                        <span class="sample-label">Sample</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-icon">🫒</div>
+                    <span>OliveAI Disease Detection</span>
+                </div>
+                <p>Powered by advanced machine learning algorithms</p>
+                <div class="social-links">
+                    <a href="#" aria-label="GitHub">📚</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

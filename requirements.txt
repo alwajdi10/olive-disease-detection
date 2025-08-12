@@ -1,0 +1,17 @@
+Flask==2.3.3
+Flask-CORS==4.0.0
+Pillow==10.0.1
+numpy==1.24.3
+requests==2.31.0
+opencv-python==4.8.1.78
+ultralytics==8.0.196
+torch==2.0.1
+torchvision==0.15.2
+gunicorn==21.2.0
+python-dotenv==1.0.0
+Werkzeug==2.3.7
+
+# Development dependencies (optional)
+# pytest==7.4.2
+# black==23.9.1
+# pylint==2.17.5
